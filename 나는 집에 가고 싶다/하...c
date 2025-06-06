@@ -28,14 +28,29 @@ int main(void) {
     int relation = 2; //관계, 친밀도
     int leave = 2; //이전 위치, 즉 이미 떠나 자리, 3이상이면 이동
     int cat = 1; //고양이 위치
-    int a = 0; //주사위 수
+    int a = 0; //상호작용
     int CP = 0; //CP 포인트
     int feel = 3; //기분
 
     while (1) {
         printf("==========현재상태==========\n");
         printf("지금까지 만든 수프의 개수: %d개\n", soup);
+        printf("CP: %d 포인트\n", CP);
+        printf("쫀덕이 기분(0~3): %d\n", feel);
         printf("집사와의 관계(0~4): %d\n", relation);
+
+        if (feel == 0) {
+            printf("기분이 매우 나쁩니다.\n");
+        }
+        if (feel == 1) {
+            printf("심심해 합니다.\n");
+        }
+        if (feel == 2) {
+            printf("식빵을 굽습니다.\n");
+        }
+        if (feel == 3) {
+            printf("골골송을 부릅니다.\n");
+        }
 
         if (relation == 0) {
             printf("곁에 오는 것조차 싫어합니다.\n");
@@ -57,6 +72,28 @@ int main(void) {
         }
         printf("===============================\n\n");
         Sleep(500);
+
+        srand((unsigned)time(NULL));
+
+        printf("주사위의 눈이 6 - %d이하면 그냥 기분이 나빠집니다.\n 주사위를 굴립니다. 또르륵...\n", relation);
+        int rrr; //“아무이유없이기분이나빠집니다. 고양이니까?”라는 이유로 걍 굴리는 주사위
+		rrr = rand() % 6 + 1;
+        printf("%d이(가) 나왔습니다!\n", rrr);
+        if (rrr <= 6 - relation) { //주사위 눈 6 - relation이하 친밀도 하락
+            printf("기분이 나빠집니다.\n");
+            feel--;
+            if (feel < 0) {
+                feel = 0; //기분은 0아래로 내려가면 안됨
+            }
+            if (feel > 3) {
+				feel = 3; //기분은 3을 넘어갈 수 없음
+            }
+        }
+		else {
+			printf("다행히 기분이 나빠지지 않았습니다.\n");
+		}
+        printf("현재 기분: %d\n", feel);
+
 
         srand((unsigned)time(NULL));
 
