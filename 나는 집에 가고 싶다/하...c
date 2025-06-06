@@ -3,9 +3,11 @@
 #include <Windows.h>
 #include <time.h>
 
-#define ROOM_WIDTH 6
+#define ROOM_WIDTH 10
 #define HME_POS 1 //집 위치
 #define BWL_POS (ROOM_WIDTH - 2) //냄비 위치
+#define TWR_POS 3 //타워 위치
+#define SCR_POS 6 //스크래쳐 위치
 
 int main(void) {
 
@@ -27,6 +29,8 @@ int main(void) {
     int leave = 2; //이전 위치, 즉 이미 떠나 자리, 3이상이면 이동
     int cat = 1; //고양이 위치
     int a = 0; //주사위 수
+    int CP = 0; //CP 포인트
+    int feel = 3; //기분
 
     while (1) {
         printf("==========현재상태==========\n");
@@ -111,6 +115,12 @@ int main(void) {
         for (int i = 1; i < ROOM_WIDTH - 1; i++) {
             if (i == HME_POS) {
                 printf("H"); //집
+            }
+            else if (i == TWR_POS) {
+                printf("T"); //타워
+            }
+            else if (i == SCR_POS) {
+                printf("S"); //스크래쳐
             }
             else if (i == BWL_POS) { //냄비
                 printf("B");
