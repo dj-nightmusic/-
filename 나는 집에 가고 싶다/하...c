@@ -230,7 +230,7 @@ int main(void) {
             if (cat < HME_POS && cat < ROOM_WIDTH - 1) {
                 cat++;
             }
-            else if (cat > HME_POS && cat > 0) {
+            else (cat > HME_POS && cat > 0); {
                 cat--;
             }
         }
@@ -251,25 +251,34 @@ int main(void) {
 		}
 		if (feel == 3) {
 			printf("%s은(는) 골골송을 부르며 수프를 만들러 갑니다.\n", name); //냄비 쪽으로 이동
-            if (cat < BWL_POS && cat < ROOM_WIDTH - 2) {
+            if (cat < BWL_POS && cat < ROOM_WIDTH - 1) {
                 cat++;
             }
-            else if (cat > BWL_POS && cat > 0) {
+            else (cat > BWL_POS && cat > 0); {
                 cat--;
             }
 		}
 
-        // 상태에 따른 이벤트
-        if (cat == HME_POS) {
+        // 상태에 따른 행동
+        if (cat == HME_POS) { //집에 있을 때
             printf("쫀떡은(는) 자신의 집에서 편안함을 느낍니다.\n\n");
+            feel++;
 
         }
-        else if (cat == BWL_POS) {
+		else if (cat == BWL_POS) { //냄비에 있을 때
             const char* soups[] = { "감자수프", "양송이수프", "브로콜리수프" };
             int taste = rand() % 3;
             soup++;
             printf("쫀떡이(가) %s를 만들었습니다!\n", soups[taste]);
             printf("현재까지 만든 수프: %d개\n\n", soup);
+        }
+		else if (cat == SCR_POS) { //스크래쳐에 있을 때
+            printf("%s은(는) 스크래처를 긁고 놀았습니다. 기분이 조금 좋아졌습니다.\n", name);
+            feel++;
+        }
+		else (cat == TWR_POS); { //타워에 있을 때
+            printf("%s은(는) 캣타워를 뛰어다닙니다. 기분이 제법 좋아졌습니다.\n", name);
+            feel += 2;
         }
     }
 
