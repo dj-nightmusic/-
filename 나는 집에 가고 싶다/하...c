@@ -18,10 +18,10 @@ int main(void) {
     printf(" |     |\\  \n");
     printf("         \\/  \n");
 
-    char name[20]; // 고양이 이름 저장
+    char name[100]; // 고양이 이름 저장
 
-    printf("야옹이의 이름을 입력해주세요: ");
-    scanf_s("%s", &name, 20);
+    printf("야옹이의 이름을 입력해주세요(애국심을 갖고 한국어로 지어주세요).: ");
+    scanf_s("%s", &name, 100);
     printf("야옹이의 이름은 %s입니다.", name);
     Sleep(1000); //1초 대기
     system("cls");
@@ -36,7 +36,7 @@ int main(void) {
     int CP = 0; //CP 포인트
     int feel = 3; //기분
     int laser = 0; //레이저 포인터
-    int mouse = 0; //쥐 장남감
+    int mouse = 1; //쥐 장남감
 
     while (1) {
         printf("==========현재상태==========\n");
@@ -83,7 +83,7 @@ int main(void) {
         srand((unsigned)time(NULL));
 
         printf("주사위의 눈이 6 - %d이하면 그냥 기분이 나빠집니다.\n 주사위를 굴립니다. 또르륵...\n", relation);
-        int rrr; //“아무 이유없이 기분이 나빠집니다. 고양이니까?”라는 이유로 걍 굴리는 주사위
+        int rrr; //“아무 이유 없이 기분이 나빠집니다. 고양이니까?”라는 이유로 걍 굴리는 주사위
 		rrr = rand() % 6 + 1;
         printf("%d이(가) 나왔습니다!\n", rrr);
         if (rrr <= 6 - relation) { //주사위 눈 6 - relation이하 친밀도 하락
@@ -104,44 +104,36 @@ int main(void) {
 
         srand((unsigned)time(NULL));
  
-        if (laser == 0 && mouse == 0) {
-            printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기>> ");
-            scanf_s("%d", &a);
-        }
-        else if (laser == 1 && mouse == 0) {
-            printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기>> ");
-            scanf_s("%d", &a);
-        }
-        else if (laser == 0 && mouse == 1) {
-            printf("어떤상호 작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.장난감 쥐로 놀아주기>> ");
-            scanf_s("%d", &a);
-        }
-        else (laser == 1 && mouse == 1); {
-			printf("어떤상호 작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기 3.장난감 쥐로 놀아주기>> ");
-			scanf_s("%d", &a);
-		}
-
+        
         while (1) {
 
             if (laser == 0 && mouse == 0) {
+                if (a != 0 && a != 1) {
                 printf("0과 1중 하나를 입력하세요.\n");
                 printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기>> ");
                 scanf_s("%d", &a);
+                }
             }
             else if (laser == 1 && mouse == 0) {
-                printf("0과 1과 2중 하나를 입력하세요.\n");
-                printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기>> ");
-                scanf_s("%d", &a);
+                if (a != 0 && a != 1 && a != 2) {
+                    printf("0과 1과 2중 하나를 입력하세요.\n");
+                    printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기>> ");
+                    scanf_s("%d", &a);
+                }
             }
             else if (laser == 0 && mouse == 1) {
-                printf("0과 1중 하나를 입력하세요.\n");
-                printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.장난감 쥐로 놀아주기>> ");
-                scanf_s("%d", &a);
+                if (a != 0 && a != 1 && a != 2) {
+                    printf("0과 1과 2중 하나를 입력하세요.\n");
+                    printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.장난감 쥐로 놀아주기>> ");
+                    scanf_s("%d", &a);
+                }
             }
             else (laser == 1 && mouse == 1); {
-                printf("0과 1과 2중 하나를 입력하세요.\n");
-                printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기 3.장난감 쥐로 놀아주기>> ");
-                scanf_s("%d", &a);
+                if (a != 0 && a != 1 && a != 2 && a != 3) {
+                    printf("0과 1과 2와 3중 하나를 입력하세요.\n");
+                    printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기 3.장난감 쥐로 놀아주기>> ");
+                    scanf_s("%d", &a);
+                }
             }
         }
         if (a == 0) {
@@ -164,7 +156,7 @@ int main(void) {
             printf("현재 친밀도: %d\n", relation);
         }
         else {
-            printf("쫀덕의 턱을 긁어주었습니다.\n 2/6확률로 친밀도가 높아집니다.\n 주사위를 굴립니다. 또르륵...\n");
+            printf("%s의 턱을 긁어주었습니다.\n 2/6확률로 친밀도가 높아집니다.\n 주사위를 굴립니다. 또르륵...\n", name);
             int rr; //주사위 수
             rr = rand() % 6 + 1;
             printf("%d이(가) 나왔습니다!\n", rr);
@@ -225,7 +217,7 @@ int main(void) {
         }
         printf("\n");
 
-       /* printf("쫀덕 이동: 집사와 친밀할 수록 냄비로 이동할 확률이 높아집니다.\n"); // ver. 1 좌우 이동 부분임
+       /* printf("%s 이동: 집사와 친밀할 수록 냄비로 이동할 확률이 높아집니다.\n", name); // ver. 1 좌우 이동 부분임
         int limit = 6 - relation;
         double probability = ((6 - limit + 1) / 6.0) * 100.0;
         printf("주사위 눈이 %d이상이면 냄비쪽으로 이동합니다.\n", limit);
@@ -294,7 +286,7 @@ int main(void) {
 
         // 상태에 따른 행동
         if (cat == HME_POS) { //집에 있을 때
-            printf("쫀떡은(는) 자신의 집에서 편안함을 느낍니다.\n\n");
+            printf("%s은(는) 자신의 집에서 편안함을 느낍니다.\n\n", name);
             feel++;
 
         }
@@ -302,7 +294,7 @@ int main(void) {
             const char* soups[] = { "감자수프", "양송이수프", "브로콜리수프" };
             int taste = rand() % 3;
             soup++;
-            printf("쫀떡이(가) %s를 만들었습니다!\n", soups[taste]);
+            printf("%s이(가) %s를 만들었습니다!\n", name, soups[taste]);
             printf("현재까지 만든 수프: %d개\n\n", soup);
         }
 		else if (cat == SCR_POS) { //스크래쳐에 있을 때
