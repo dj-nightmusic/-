@@ -35,6 +35,8 @@ int main(void) {
     int a = 0; //상호작용
     int CP = 0; //CP 포인트
     int feel = 3; //기분
+    int laser = 0; //레이저 포인터
+    int mouse = 0; //쥐 장남감
 
     while (1) {
         printf("==========현재상태==========\n");
@@ -81,7 +83,7 @@ int main(void) {
         srand((unsigned)time(NULL));
 
         printf("주사위의 눈이 6 - %d이하면 그냥 기분이 나빠집니다.\n 주사위를 굴립니다. 또르륵...\n", relation);
-        int rrr; //“아무이유없이기분이나빠집니다. 고양이니까?”라는 이유로 걍 굴리는 주사위
+        int rrr; //“아무 이유없이 기분이 나빠집니다. 고양이니까?”라는 이유로 걍 굴리는 주사위
 		rrr = rand() % 6 + 1;
         printf("%d이(가) 나왔습니다!\n", rrr);
         if (rrr <= 6 - relation) { //주사위 눈 6 - relation이하 친밀도 하락
@@ -101,15 +103,46 @@ int main(void) {
 
 
         srand((unsigned)time(NULL));
-
-        printf("어떤상호작용을하시겠습니까?   0.아무것도하지않음 1.긁어주기>> ");
-        scanf_s("%d", &a);
-
-        while (a != 0 && a != 1) {
-
-            printf("0과 1중 하나를 입력하세요.\n");
-            printf("어떤상호작용을하시겠습니까?   0.아무것도하지않음 1.긁어주기>> ");
+ 
+        if (laser == 0 && mouse == 0) {
+            printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기>> ");
             scanf_s("%d", &a);
+        }
+        else if (laser == 1 && mouse == 0) {
+            printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기>> ");
+            scanf_s("%d", &a);
+        }
+        else if (laser == 0 && mouse == 1) {
+            printf("어떤상호 작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.장난감 쥐로 놀아주기>> ");
+            scanf_s("%d", &a);
+        }
+        else (laser == 1 && mouse == 1); {
+			printf("어떤상호 작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기 3.장난감 쥐로 놀아주기>> ");
+			scanf_s("%d", &a);
+		}
+
+        while (1) {
+
+            if (laser == 0 && mouse == 0) {
+                printf("0과 1중 하나를 입력하세요.\n");
+                printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기>> ");
+                scanf_s("%d", &a);
+            }
+            else if (laser == 1 && mouse == 0) {
+                printf("0과 1과 2중 하나를 입력하세요.\n");
+                printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기>> ");
+                scanf_s("%d", &a);
+            }
+            else if (laser == 0 && mouse == 1) {
+                printf("0과 1중 하나를 입력하세요.\n");
+                printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.장난감 쥐로 놀아주기>> ");
+                scanf_s("%d", &a);
+            }
+            else (laser == 1 && mouse == 1); {
+                printf("0과 1과 2중 하나를 입력하세요.\n");
+                printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기 3.장난감 쥐로 놀아주기>> ");
+                scanf_s("%d", &a);
+            }
         }
         if (a == 0) {
 
