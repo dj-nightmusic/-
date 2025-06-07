@@ -18,7 +18,11 @@ int main(void) {
     printf(" |     |\\  \n");
     printf("         \\/  \n");
 
-    printf("야옹이의 이름은 쫀덕입니다.");
+    char name[20]; // 고양이 이름 저장
+
+    printf("야옹이의 이름을 입력해주세요: ");
+    scanf_s("%s", &name, 20);
+    printf("야옹이의 이름은 %s입니다.", name);
     Sleep(1000); //1초 대기
     system("cls");
 
@@ -36,11 +40,12 @@ int main(void) {
         printf("==========현재상태==========\n");
         printf("지금까지 만든 수프의 개수: %d개\n", soup);
         printf("CP: %d 포인트\n", CP);
-        printf("쫀덕이 기분(0~3): %d\n", feel);
+        printf("고양이 기분(0~3): %d\n", feel);
         printf("집사와의 관계(0~4): %d\n", relation);
 
         if (feel == 0) {
             printf("기분이 매우 나쁩니다.\n");
+            printf("기분이 매우 나쁜 %s은(는) 집으로 향합니다.\n", name);
         }
         if (feel == 1) {
             printf("심심해 합니다.\n");
@@ -187,7 +192,7 @@ int main(void) {
         }
         printf("\n");
 
-        printf("쫀덕 이동: 집사와 친밀할 수록 냄비로 이동할 확률이 높아집니다.\n");
+       /* printf("쫀덕 이동: 집사와 친밀할 수록 냄비로 이동할 확률이 높아집니다.\n"); // ver. 1 좌우 이동 부분임
         int limit = 6 - relation;
         double probability = ((6 - limit + 1) / 6.0) * 100.0;
         printf("주사위 눈이 %d이상이면 냄비쪽으로 이동합니다.\n", limit);
@@ -218,30 +223,41 @@ int main(void) {
                 printf("하지만 벽에 막혀 움직일 수 없습니다.\n\n");
             }
         }
-        Sleep(1000);
+        Sleep(1000);*/ // ver. 2에서는 좌우 이동 삭제
 
-        for (int i = 0; i < ROOM_WIDTH; i++) printf("#");
-        printf("\n#");
-        for (int i = 1; i < ROOM_WIDTH - 1; i++) {
-            if (i == HME_POS) printf("H");
-            else if (i == BWL_POS) printf("B");
-            else printf(" ");
-        }
-        printf("#\n#");
-        for (int i = 1; i < ROOM_WIDTH - 1; i++) {
-            if (i == cat) {
-                printf("C");
+        if (feel == 0) {
+            printf("기분이 매우 나쁜 %s은(는) 집으로 향합니다.\n", name);
+            if (cat < HME_POS && cat < ROOM_WIDTH - 1) {
+                cat++;
             }
-            else if (i == leave && cat != leave) {
-                printf(".");
-            }
-            else {
-                printf(" ");
+            else if (cat > HME_POS && cat > 0) {
+                cat--;
             }
         }
-        printf("#\n");
-        for (int i = 0; i < ROOM_WIDTH; i++) printf("#");
-        printf("\n\n");
+        if (feel == 1) {
+            printf("%s은(는)심심해서 스크래처 쪽으로 이동합니다.\n", name);
+            if (cat < SCR_POS && cat < TWR_POS && cat < ROOM_WIDTH - 2) {
+                cat++;
+            }
+            else if (cat > SCR_POS && cat < TWR_POS && cat > 0) {
+                cat--;
+            }
+            else (cat != SCR_POS && cat != TWR_POS); {
+                printf("놀이기구가 없으면 기분 - 1: 놀거리가 없어서 기분이 매우 나빠집니다.\n");
+            }
+        }
+		if (feel == 2) {
+            printf("%s은(는) 기분좋게 식빵을 굽고 있습니다..\n", name);
+		}
+		if (feel == 3) {
+			printf("%s은(는) 골골송을 부르며 수프를 만들러 갑니다.\n", name);
+            if (cat < BWL_POS && cat < ROOM_WIDTH - 2) {
+                cat++;
+            }
+            else if (cat > BWL_POS && cat > 0) {
+                cat--;
+            }
+		}
 
         // 상태에 따른 이벤트
         if (cat == HME_POS) {
