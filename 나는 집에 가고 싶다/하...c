@@ -226,7 +226,7 @@ int main(void) {
         Sleep(1000);*/ // ver. 2에서는 좌우 이동 삭제
 
         if (feel == 0) {
-            printf("기분이 매우 나쁜 %s은(는) 집으로 향합니다.\n", name);
+            printf("기분이 매우 나쁜 %s은(는) 집으로 향합니다.\n", name); //집으로 이동
             if (cat < HME_POS && cat < ROOM_WIDTH - 1) {
                 cat++;
             }
@@ -235,7 +235,7 @@ int main(void) {
             }
         }
         if (feel == 1) {
-            printf("%s은(는)심심해서 스크래처 쪽으로 이동합니다.\n", name);
+            printf("%s은(는)심심해서 놀이기구 쪽으로 이동합니다.\n", name); //더 가까운 놀이기구 쪽으로 이동
             if (cat < SCR_POS && cat < TWR_POS && cat < ROOM_WIDTH - 2) {
                 cat++;
             }
@@ -247,10 +247,10 @@ int main(void) {
             }
         }
 		if (feel == 2) {
-            printf("%s은(는) 기분좋게 식빵을 굽고 있습니다..\n", name);
+            printf("%s은(는) 기분좋게 식빵을 굽고 있습니다..\n", name); //제자리에 대기
 		}
 		if (feel == 3) {
-			printf("%s은(는) 골골송을 부르며 수프를 만들러 갑니다.\n", name);
+			printf("%s은(는) 골골송을 부르며 수프를 만들러 갑니다.\n", name); //냄비 쪽으로 이동
             if (cat < BWL_POS && cat < ROOM_WIDTH - 2) {
                 cat++;
             }
@@ -262,6 +262,7 @@ int main(void) {
         // 상태에 따른 이벤트
         if (cat == HME_POS) {
             printf("쫀떡은(는) 자신의 집에서 편안함을 느낍니다.\n\n");
+
         }
         else if (cat == BWL_POS) {
             const char* soups[] = { "감자수프", "양송이수프", "브로콜리수프" };
