@@ -35,8 +35,10 @@ int main(void) {
     int a = 0; //상호작용
     int CP = 0; //CP 포인트
     int feel = 3; //기분
-    int laser = 0; //레이저 포인터
+    int laser = 1; //레이저 포인터
     int mouse = 1; //쥐 장남감
+    int toy; // 장난감 수
+    toy = laser + mouse; //레이저와 쥐 만을 장난감으로 여기는 세상임
 
     while (1) {
         printf("==========현재상태==========\n");
@@ -104,208 +106,215 @@ int main(void) {
 
         srand((unsigned)time(NULL));
  
-        
-        while (1) {
-
-            if (laser == 0 && mouse == 0) {
-                if (a != 0 && a != 1) {
+        if (toy == 0) {
+			printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기>> ");
+			scanf_s("%d", &a);
+            while (a != 0 && a != 1) {
                 printf("0과 1중 하나를 입력하세요.\n");
                 printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기>> ");
                 scanf_s("%d", &a);
-                }
             }
-            else if (laser == 1 && mouse == 0) {
-                if (a != 0 && a != 1 && a != 2) {
+        }
+        if (toy == 1) {
+            if (laser == 1) {
+                printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기>> ");
+                scanf_s("%d", &a);
+                while (a != 0 && a != 1 && a != 2) {
                     printf("0과 1과 2중 하나를 입력하세요.\n");
                     printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기>> ");
                     scanf_s("%d", &a);
                 }
             }
-            else if (laser == 0 && mouse == 1) {
-                if (a != 0 && a != 1 && a != 2) {
+            if (mouse == 1) {
+                printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.장난감 쥐로 놀아주기>> ");
+                scanf_s("%d", &a);
+                while (a != 0 && a != 1 && a != 2) {
                     printf("0과 1과 2중 하나를 입력하세요.\n");
                     printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.장난감 쥐로 놀아주기>> ");
                     scanf_s("%d", &a);
                 }
             }
-            else (laser == 1 && mouse == 1); {
-                if (a != 0 && a != 1 && a != 2 && a != 3) {
-                    printf("0과 1과 2와 3중 하나를 입력하세요.\n");
+        }
+                if (toy == 2) {
                     printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기 3.장난감 쥐로 놀아주기>> ");
                     scanf_s("%d", &a);
+                    while (a != 0 && a != 1 && a != 2 && a != 3) {
+                        printf("0과 1과 2와 3중 하나를 입력하세요.\n");
+                        printf("어떤 상호작용을 하시겠습니까?   0.아무것도 하지않음 1.긁어주기 2.레이저 포인터로 놀아주기 3.장난감 쥐로 놀아주기>> ");
+                        scanf_s("%d", &a);
+                    }
+                }
+
+                if (a == 0) {
+
+                    printf("아무것도 하지 않습니다.\n 4/6확룰로 친밀도가 떨어집니다.\n 주사위를 굴립니다. 또르륵...\n");
+                    int r; //주사위 수
+                    r = rand() % 6 + 1;
+                    printf("%d이(가) 나왔습니다!\n", r);
+                    if (r <= 4) { //주사위 눈 4이하 친밀도 하락
+                        printf("친밀도가 떨어집니다.\n");
+                        relation--;
+
+                        if (relation < 0) {
+                            relation = 0; //친밀도는 0아래로 내려가면 안됨
+                        }
+                    }
+                    else {
+                        printf("다행히 친밀도가 떨어지지 않았습니다.\n");
+                    }
+                    printf("현재 친밀도: %d\n", relation);
+                }
+                else {
+                    printf("%s의 턱을 긁어주었습니다.\n 2/6확률로 친밀도가 높아집니다.\n 주사위를 굴립니다. 또르륵...\n", name);
+                    int rr; //주사위 수
+                    rr = rand() % 6 + 1;
+                    printf("%d이(가) 나왔습니다!\n", rr);
+                    if (rr >= 5) { //주사위 눈 5이상 친밀도 상승
+                        printf("친밀도가 상승합니다.\n");
+                        relation++;
+                        if (relation > 4) {
+                            relation = 4; //친밀도는 4를 넘어갈 수 없음
+                        }
+                    }
+                    else {
+                        printf("친밀도는 그대로 입니다.\n");
+                    }
+                    printf("현재 친밀도: %d\n", relation);
+                }
+
+                for (int i = 0; i < ROOM_WIDTH; i++) {
+                    printf("#");
+                }
+                printf("\n");
+
+                printf("#");
+                for (int i = 1; i < ROOM_WIDTH - 1; i++) {
+                    if (i == HME_POS) {
+                        printf("H"); //집
+                    }
+                    else if (i == TWR_POS) {
+                        printf("T"); //타워
+                    }
+                    else if (i == SCR_POS) {
+                        printf("S"); //스크래쳐
+                    }
+                    else if (i == BWL_POS) { //냄비
+                        printf("B");
+                    }
+                    else {
+                        printf(" ");
+                    }
+                }
+                printf("#\n");
+
+                printf("#");
+                for (int i = 1; i < ROOM_WIDTH - 1; i++) {
+                    if (i == cat) {
+                        printf("C"); //고양이
+                    }
+                    else if (i == leave && cat != leave) {
+                        printf(".");
+                    }
+                    else {
+                        printf(" ");
+                    }
+                }
+                printf("#\n");
+
+                for (int i = 0; i < ROOM_WIDTH; i++) {
+                    printf("#");
+                }
+                printf("\n");
+
+                /* printf("%s 이동: 집사와 친밀할 수록 냄비로 이동할 확률이 높아집니다.\n", name); // ver. 1 좌우 이동 부분임
+                 int limit = 6 - relation;
+                 double probability = ((6 - limit + 1) / 6.0) * 100.0;
+                 printf("주사위 눈이 %d이상이면 냄비쪽으로 이동합니다.\n", limit);
+                 printf("→ 확률: 약 %.1f%%\n", probability);
+
+                 srand((unsigned)time(NULL));
+
+                 int dice = rand() % 6 + 1;
+                 printf("주사위를 굴립니다. 또르륵...\n");
+                 Sleep(1000);
+                 printf("%d이(가) 나왔습니다!\n", dice);
+
+                 if (dice >= limit) {
+                     printf("냄비 쪽으로 이동합니다.\n\n");
+                     if (cat < ROOM_WIDTH - 2) {
+                         cat++;
+                     }
+                     else {
+                         printf("하지만 벽에 막혀 움직일 수 없습니다.\n\n");
+                     }
+                 }
+                 else {
+                     printf("집 쪽으로 움직입니다.\n\n");
+                     if (cat > 1) {
+                         cat--;
+                     }
+                     else {
+                         printf("하지만 벽에 막혀 움직일 수 없습니다.\n\n");
+                     }
+                 }
+                 Sleep(1000);*/ // ver. 2에서는 좌우 이동 삭제
+
+                if (feel == 0) {
+                    printf("기분이 매우 나쁜 %s은(는) 집으로 향합니다.\n", name); //집으로 이동
+                    if (cat < HME_POS && cat < ROOM_WIDTH - 1) {
+                        cat++;
+                    }
+                    else (cat > HME_POS && cat > 0); {
+                        cat--;
+                    }
+                }
+                if (feel == 1) {
+                    printf("%s은(는)심심해서 놀이기구 쪽으로 이동합니다.\n", name); //더 가까운 놀이기구 쪽으로 이동
+                    if (cat < SCR_POS && cat < TWR_POS && cat < ROOM_WIDTH - 2) {
+                        cat++;
+                    }
+                    else if (cat > SCR_POS && cat < TWR_POS && cat > 0) {
+                        cat--;
+                    }
+                    else (cat != SCR_POS && cat != TWR_POS); {
+                        printf("놀이기구가 없으면 기분 - 1: 놀거리가 없어서 기분이 매우 나빠집니다.\n");
+                    }
+                }
+                if (feel == 2) {
+                    printf("%s은(는) 기분좋게 식빵을 굽고 있습니다..\n", name); //제자리에 대기
+                }
+                if (feel == 3) {
+                    printf("%s은(는) 골골송을 부르며 수프를 만들러 갑니다.\n", name); //냄비 쪽으로 이동
+                    if (cat < BWL_POS && cat < ROOM_WIDTH - 1) {
+                        cat++;
+                    }
+                    else (cat > BWL_POS && cat > 0); {
+                        cat--;
+                    }
+                }
+
+                // 상태에 따른 행동
+                if (cat == HME_POS) { //집에 있을 때
+                    printf("%s은(는) 자신의 집에서 편안함을 느낍니다.\n\n", name);
+                    feel++;
+
+                }
+                else if (cat == BWL_POS) { //냄비에 있을 때
+                    const char* soups[] = { "감자수프", "양송이수프", "브로콜리수프" };
+                    int taste = rand() % 3;
+                    soup++;
+                    printf("%s이(가) %s를 만들었습니다!\n", name, soups[taste]);
+                    printf("현재까지 만든 수프: %d개\n\n", soup);
+                }
+                else if (cat == SCR_POS) { //스크래쳐에 있을 때
+                    printf("%s은(는) 스크래처를 긁고 놀았습니다. 기분이 조금 좋아졌습니다.\n", name);
+                    feel++;
+                }
+                else (cat == TWR_POS); { //타워에 있을 때
+                    printf("%s은(는) 캣타워를 뛰어다닙니다. 기분이 제법 좋아졌습니다.\n", name);
+                    feel += 2;
                 }
             }
-        }
-        if (a == 0) {
 
-            printf("아무것도 하지 않습니다.\n 4/6확룰로 친밀도가 떨어집니다.\n 주사위를 굴립니다. 또르륵...\n");
-            int r; //주사위 수
-            r = rand() % 6 + 1;
-            printf("%d이(가) 나왔습니다!\n", r);
-            if (r <= 4) { //주사위 눈 4이하 친밀도 하락
-                printf("친밀도가 떨어집니다.\n");
-                relation--;
-
-                if (relation < 0) {
-                    relation = 0; //친밀도는 0아래로 내려가면 안됨
-                }
-            }
-            else {
-                printf("다행히 친밀도가 떨어지지 않았습니다.\n");
-            }
-            printf("현재 친밀도: %d\n", relation);
+            return 0;
         }
-        else {
-            printf("%s의 턱을 긁어주었습니다.\n 2/6확률로 친밀도가 높아집니다.\n 주사위를 굴립니다. 또르륵...\n", name);
-            int rr; //주사위 수
-            rr = rand() % 6 + 1;
-            printf("%d이(가) 나왔습니다!\n", rr);
-            if (rr >= 5) { //주사위 눈 5이상 친밀도 상승
-                printf("친밀도가 상승합니다.\n");
-                relation++;
-                if (relation > 4) {
-                    relation = 4; //친밀도는 4를 넘어갈 수 없음
-                }
-            }
-            else {
-                printf("친밀도는 그대로 입니다.\n");
-            }
-            printf("현재 친밀도: %d\n", relation);
-        }
-
-        for (int i = 0; i < ROOM_WIDTH; i++) {
-            printf("#");
-        }
-        printf("\n");
-
-        printf("#");
-        for (int i = 1; i < ROOM_WIDTH - 1; i++) {
-            if (i == HME_POS) {
-                printf("H"); //집
-            }
-            else if (i == TWR_POS) {
-                printf("T"); //타워
-            }
-            else if (i == SCR_POS) {
-                printf("S"); //스크래쳐
-            }
-            else if (i == BWL_POS) { //냄비
-                printf("B");
-            }
-            else {
-                printf(" ");
-            }
-        }
-        printf("#\n");
-
-        printf("#");
-        for (int i = 1; i < ROOM_WIDTH - 1; i++) {
-            if (i == cat) {
-                printf("C"); //고양이
-            }
-            else if (i == leave && cat != leave) {
-                printf(".");
-            }
-            else {
-                printf(" ");
-            }
-        }
-        printf("#\n");
-
-        for (int i = 0; i < ROOM_WIDTH; i++) {
-            printf("#");
-        }
-        printf("\n");
-
-       /* printf("%s 이동: 집사와 친밀할 수록 냄비로 이동할 확률이 높아집니다.\n", name); // ver. 1 좌우 이동 부분임
-        int limit = 6 - relation;
-        double probability = ((6 - limit + 1) / 6.0) * 100.0;
-        printf("주사위 눈이 %d이상이면 냄비쪽으로 이동합니다.\n", limit);
-        printf("→ 확률: 약 %.1f%%\n", probability);
-
-        srand((unsigned)time(NULL));
-
-        int dice = rand() % 6 + 1;
-        printf("주사위를 굴립니다. 또르륵...\n");
-        Sleep(1000);
-        printf("%d이(가) 나왔습니다!\n", dice);
-
-        if (dice >= limit) {
-            printf("냄비 쪽으로 이동합니다.\n\n");
-            if (cat < ROOM_WIDTH - 2) {
-                cat++;
-            }
-            else {
-                printf("하지만 벽에 막혀 움직일 수 없습니다.\n\n");
-            }
-        }
-        else {
-            printf("집 쪽으로 움직입니다.\n\n");
-            if (cat > 1) {
-                cat--;
-            }
-            else {
-                printf("하지만 벽에 막혀 움직일 수 없습니다.\n\n");
-            }
-        }
-        Sleep(1000);*/ // ver. 2에서는 좌우 이동 삭제
-
-        if (feel == 0) {
-            printf("기분이 매우 나쁜 %s은(는) 집으로 향합니다.\n", name); //집으로 이동
-            if (cat < HME_POS && cat < ROOM_WIDTH - 1) {
-                cat++;
-            }
-            else (cat > HME_POS && cat > 0); {
-                cat--;
-            }
-        }
-        if (feel == 1) {
-            printf("%s은(는)심심해서 놀이기구 쪽으로 이동합니다.\n", name); //더 가까운 놀이기구 쪽으로 이동
-            if (cat < SCR_POS && cat < TWR_POS && cat < ROOM_WIDTH - 2) {
-                cat++;
-            }
-            else if (cat > SCR_POS && cat < TWR_POS && cat > 0) {
-                cat--;
-            }
-            else (cat != SCR_POS && cat != TWR_POS); {
-                printf("놀이기구가 없으면 기분 - 1: 놀거리가 없어서 기분이 매우 나빠집니다.\n");
-            }
-        }
-		if (feel == 2) {
-            printf("%s은(는) 기분좋게 식빵을 굽고 있습니다..\n", name); //제자리에 대기
-		}
-		if (feel == 3) {
-			printf("%s은(는) 골골송을 부르며 수프를 만들러 갑니다.\n", name); //냄비 쪽으로 이동
-            if (cat < BWL_POS && cat < ROOM_WIDTH - 1) {
-                cat++;
-            }
-            else (cat > BWL_POS && cat > 0); {
-                cat--;
-            }
-		}
-
-        // 상태에 따른 행동
-        if (cat == HME_POS) { //집에 있을 때
-            printf("%s은(는) 자신의 집에서 편안함을 느낍니다.\n\n", name);
-            feel++;
-
-        }
-		else if (cat == BWL_POS) { //냄비에 있을 때
-            const char* soups[] = { "감자수프", "양송이수프", "브로콜리수프" };
-            int taste = rand() % 3;
-            soup++;
-            printf("%s이(가) %s를 만들었습니다!\n", name, soups[taste]);
-            printf("현재까지 만든 수프: %d개\n\n", soup);
-        }
-		else if (cat == SCR_POS) { //스크래쳐에 있을 때
-            printf("%s은(는) 스크래처를 긁고 놀았습니다. 기분이 조금 좋아졌습니다.\n", name);
-            feel++;
-        }
-		else (cat == TWR_POS); { //타워에 있을 때
-            printf("%s은(는) 캣타워를 뛰어다닙니다. 기분이 제법 좋아졌습니다.\n", name);
-            feel += 2;
-        }
-    }
-
-    return 0;
-}
