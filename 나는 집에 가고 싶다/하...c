@@ -235,92 +235,87 @@ int main(void) {
         }
         srand((unsigned)time(NULL));
 
-        while (1) {
-            printf("\n상점에서 물건을 살 수 있습니다.\n");
-            printf("어떤 물건을 구매할까요? (현재 CP: %d)\n", CP);
-            printf("0. 아무것도 사지 않는다.\n");
-            printf("1. 장난감 쥐: %d CP\n", PRICE_MOUSE);
-            printf("2. 레이저 포인터: %d CP\n", PRICE_LASER);
-            printf("3. 스크래쳐: %d CP\n", PRICE_SCRATCHER);
-            printf("4. 캣 타워: %d CP\n", PRICE_TOWER);
-            printf(">> ");
-            scanf_s("%d", &choice);
+        printf("\n상점에서 물건을 살 수 있습니다.\n"); //상점
+        printf("어떤 물건을 구매할까요? (현재 CP: %d)\n", CP);
+        printf("0. 아무것도 사지 않는다.\n");
+        printf("1. 장난감 쥐: %d CP\n", PRICE_MOUSE);
+        printf("2. 레이저 포인터: %d CP\n", PRICE_LASER);
+        printf("3. 스크래쳐: %d CP\n", PRICE_SCRATCHER);
+        printf("4. 캣 타워: %d CP\n", PRICE_TOWER);
+        printf(">> ");
+        scanf_s("%d", &choice);
 
-                if (choice < 0 && choice > 4) {
-                    printf("존재하지 않는 제품입니다.다른 제품을 골라주세요\n");
-                    while (getchar() != '\n'); // 입력 버퍼 비우기
-                    continue; // 다시 while 루프 시작 (메뉴 다시 보여주고 입력받기)
-                }
-            while (getchar() != '\n'); // 입력 버퍼 비우기 (숫자 입력 후 남은 개행 문자 처리)
-
-
-            // 사용자 선택에 따른 처리
-            if (choice == 0) {
-                printf("아무것도 사지 않고 상점을 나갑니다.\n");
-                break; // while 루프 종료
+        if (choice == 0) {
+            printf("아무것도 사지 않고 상점을 나갑니다.\n");
+        }
+        if (choice == 1) {
+            if (mouse == 1) {
+                printf("장난감 쥐를 이미 구매했습니다.\n");
             }
-            if (choice == 1) { // 장난감 쥐
-                if (mouse == 1) {
-                    printf("장난감 쥐를 이미 구매했습니다.\n");
-                }
-                else if (CP < PRICE_MOUSE) {
-                    printf("CP가 부족합니다.\n");
-                }
-                else {
-                    CP -= PRICE_MOUSE;
-                    mouse = 1;
-                    printf("장난감 쥐를 구매했습니다.\n");
-                    printf("보유 CP %d 포인트\n", CP);
-                }
+            else if (CP < PRICE_MOUSE) {
+                printf("CP가 부족합니다.\n");
             }
-            if (choice == 2) {
-                if (laser == 1) {
-                    printf("레이저 포인터를 이미 구매했습니다.\n");
-                }
-                else if (CP < PRICE_LASER) {
-                    printf("CP가 부족합니다.\n");
-                }
-                else {
-                    CP -= PRICE_LASER;
-                    laser = 1;
-                    printf("레이저 포인터를 구매했습니다.\n");
-                    printf("보유 CP %d 포인트\n", CP);
-                }
-            }
-            if (choice == 3) {
-                if (scr == 1) {
-                    printf("스크래쳐를 이미 구매했습니다.\n");
-                }
-                else if (CP < PRICE_SCRATCHER) {
-                    printf("CP가 부족합니다.\n");
-                }
-                else {
-                    CP -= PRICE_SCRATCHER;
-                    scr = 1;
-                    printf("스크래쳐를 구매했습니다.\n");
-                    printf("보유 CP %d 포인트\n", CP);
-
-                    // 놀이 기구 무작위 위치 배치 (간단한 메시지)
-                    int position = (rand() % 10) + 1; // 1부터 10 사이의 무작위 위치
-                    printf("스크래쳐를 집의 %d 위치에 배치했습니다.\n", position);
-                }
-            }
-            if (choice == 4) {
-                if (twr == 1) {
-                    printf("캣 타워를 이미 구매했습니다.\n");
-                }
-                else if (CP < PRICE_TOWER) {
-                    printf("CP가 부족합니다.\n");
-                }
-                else {
-                    CP -= PRICE_TOWER;
-                    twr = 1;
-                    printf("캣 타워를 구매했습니다.\n");
-                    printf("보유 CP %d 포인트\n", CP);
-                }
+            else {
+                CP -= PRICE_MOUSE;
+                mouse++;
+                mouse = 1;
+                printf("장난감 쥐를 구매했습니다.\n");
+                printf("보유 CP %d 포인트\n", CP);
             }
         }
+        if (choice == 2) {
+            if (laser == 1) {
+                printf("레이저 포인터를 이미 구매했습니다.\n");
+            }
+            else if (CP < PRICE_LASER) {
+                printf("CP가 부족합니다.\n");
+            }
+            else {
+                CP -= PRICE_LASER;
+                laser++;
+                laser = 1;
+                printf("레이저 포인터를 구매했습니다.\n");
+                printf("보유 CP %d 포인트\n", CP);
+            }
+        }
+        if (choice == 3) {
+            if (scr == 1) {
+                printf("스크래쳐를 이미 구매했습니다.\n");
+            }
+            else if (CP < PRICE_SCRATCHER) {
+                printf("CP가 부족합니다.\n");
+            }
+            else {
+                CP -= PRICE_SCRATCHER;
+                scr++;
+                scr = 1;
+                printf("스크래쳐를 구매했습니다.\n");
+                printf("보유 CP %d 포인트\n", CP);
 
+                int position = (rand() % 10) + 1;
+                printf("스크래쳐를 집의 %d 위치에 배치했습니다.\n", position);
+            }
+        }
+        if (choice == 4) {
+            if (twr == 1) {
+                printf("캣 타워를 이미 구매했습니다.\n");
+            }
+            else if (CP < PRICE_TOWER) {
+                printf("CP가 부족합니다.\n");
+            }
+            else {
+                CP -= PRICE_TOWER;
+                twr++;
+                twr = 1;
+                printf("캣 타워를 구매했습니다.\n");
+                printf("보유 CP %d 포인트\n", CP);
+                int position = (rand() % 10) + 1;
+                printf("캣 타워를 집의 %d 위치에 배치했습니다.\n", position);
+            }
+        }
+        else {
+            printf("저희 매장에서는 취급하고 있지 않은 제품입니다. 다른 매장으로 가주세요, 감사합니다.\n");
+        }
                 for (int i = 0; i < ROOM_WIDTH; i++) {
                     printf("#");
                 }
