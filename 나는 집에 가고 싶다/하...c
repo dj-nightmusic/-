@@ -47,6 +47,8 @@ int main(void) {
     toy = laser + mouse; //레이저와 쥐 만을 장난감으로 여기는 세상임
     CP += ((feel - 1) > 0 ? (feel - 1) : 0) + relation; //누적하기 위해 + 붙이무
     int choice;
+	int turnCount = 0; //턴 카운트
+    char userAnswer[100];
 
     while (1) {
         if (feel < 0) {
@@ -236,6 +238,7 @@ int main(void) {
         srand((unsigned)time(NULL));
 
         printf("\n상점에서 물건을 살 수 있습니다.\n"); //상점
+
         printf("어떤 물건을 구매할까요? (현재 CP: %d)\n", CP);
         printf("0. 아무것도 사지 않는다.\n");
         printf("1. 장난감 쥐: %d CP\n", PRICE_MOUSE);
@@ -250,7 +253,7 @@ int main(void) {
         }
         if (choice == 1) {
             if (mouse == 1) {
-                printf("장난감 쥐를 이미 구매했습니다.\n");
+                printf("품절된 제품입니다.\n 다음번에 다시 이용해주세요, 감사합니다.\n");
             }
             else if (CP < PRICE_MOUSE) {
                 printf("CP가 부족합니다.\n");
@@ -265,7 +268,7 @@ int main(void) {
         }
         if (choice == 2) {
             if (laser == 1) {
-                printf("레이저 포인터를 이미 구매했습니다.\n");
+                printf("품절된 제품입니다.\n 다음번에 다시 이용해주세요, 감사합니다.\n");
             }
             else if (CP < PRICE_LASER) {
                 printf("CP가 부족합니다.\n");
@@ -280,7 +283,7 @@ int main(void) {
         }
         if (choice == 3) {
             if (scr == 1) {
-                printf("스크래쳐를 이미 구매했습니다.\n");
+                printf("품절된 제품입니다.\n 다음번에 다시 이용해주세요, 감사합니다.\n");
             }
             else if (CP < PRICE_SCRATCHER) {
                 printf("CP가 부족합니다.\n");
@@ -298,7 +301,7 @@ int main(void) {
         }
         if (choice == 4) {
             if (twr == 1) {
-                printf("캣 타워를 이미 구매했습니다.\n");
+                printf("품절된 제품입니다.\n 다음번에 다시 이용해주세요, 감사합니다.\n");
             }
             else if (CP < PRICE_TOWER) {
                 printf("CP가 부족합니다.\n");
@@ -447,6 +450,30 @@ int main(void) {
                 else (cat == TWR_POS); { //타워에 있을 때
                     printf("%s은(는) 캣타워를 뛰어다닙니다. 기분이 제법 좋아졌습니다.\n", name);
                     feel += 2;
+                }
+
+                turnCount++; // 턴이 시작될 때마다 턴 카운트 증가
+                printf("\n--- 현재 %d번째 턴 ---\n", turnCount);
+
+                if (turnCount % 3 == 0) { // turnCount를 3으로 나눈 나머지가 0이면 3의 배수
+                    printf("\n*** 돌발 퀘스트 발생! ***\n");
+                    printf("%s이의 털 색깔은 무엇일까요?\n", name);
+                    printf(">> ");
+                    while (scanf_s("%s", userAnswer, sizeof(userAnswer)) != 1) {
+                        printf("잘못된 입력입니다. 다시 입력해주세요: ");
+                        while (getchar() != '\n');
+                    }
+                    while (getchar() != '\n');
+
+                    if (strcmp(userAnswer, "없다.") == 0) {
+                        printf("정답입니다.\n");
+                    }
+                    else {
+                        printf("틀렸습니다. 이곳에서 그 고양이는 실존하지 않습니다.\n 당신은 이 프로그램을 통해 상상을 만들어 내어 그 상상 속 고양이의 색깔을 말한 것 인가요?\n");
+                        printf("살아있던 적도 죽었던 적도 없습니다.\n 하지만 당신의 머릿속에서는 살아있었을 수도 있었겠네요.\ 고양이도 이미 알고 있었을 것 입니다.\n %s는 어떤 모습이었나요?\n 웃고있었나요?\n\n", name);
+                    }
+                    printf("*** 돌발 퀘스트 종료 ***\n");
+                    printf("\n");
                 }
             }
 
