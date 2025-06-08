@@ -39,6 +39,7 @@ int main(void) {
     int mouse = 0; //쥐 장남감
     int toy; // 장난감 수
     toy = laser + mouse; //레이저와 쥐 만을 장난감으로 여기는 세상임
+    CP += ((feel - 1) > 0 ? (feel - 1) : 0) + relation; //누적하기 위해 + 붙이무
 
     while (1) {
         if (feel < 0) {
@@ -52,6 +53,8 @@ int main(void) {
         printf("CP: %d 포인트\n", CP);
         printf("고양이 기분(0~3): %d\n", feel);
         printf("집사와의 관계(0~4): %d\n", relation);
+        printf("%s의 기분과 친밀도에 따라서 CP가 %d포인트 생산되었습니다.\n", name, CP);
+        printf("보유 CP: %d 포인트\n", CP);
 
         if (feel == 0) {
             printf("기분이 매우 나쁩니다.\n");
