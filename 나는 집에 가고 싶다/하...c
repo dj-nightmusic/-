@@ -6,7 +6,7 @@
 #define ROOM_WIDTH 10
 #define HME_POS 1 //집 위치
 #define BWL_POS (ROOM_WIDTH - 2) //냄비 위치
-#define TWR_POS 3 //타워 위치
+#define TWR_POS rand() % BWL_POS - 1 + 2; //타워 위치
 #define SCR_POS 6 //스크래쳐 위치
 #define PRICE_MOUSE 1 //쥐 장난감 가격
 #define PRICE_LASER     2 //레이저 포인터 가격
@@ -99,6 +99,54 @@ int main(void) {
         }
         printf("===============================\n\n");
         Sleep(500);
+
+        for (int i = 0; i < ROOM_WIDTH; i++) {
+            printf("#");
+        }
+        printf("\n");
+
+        printf("#");
+        for (int i = 1; i < ROOM_WIDTH - 1; i++) {
+            if (i == HME_POS) {
+                printf("H"); //집
+            }
+            else if (i == TWR_POS) {
+                printf("T"); //타워
+            }
+            else if (i == SCR_POS) {
+                printf("S"); //스크래쳐
+            }
+            else if (i == BWL_POS) { //냄비
+                printf("B");
+            }
+            else {
+                printf(" ");
+            }
+        }
+        printf("#\n");
+
+        printf("#");
+        for (int i = 1; i < ROOM_WIDTH - 1; i++) {
+            if (i == cat) {
+                printf("C"); //고양이
+            }
+            else if (i == leave && cat != leave) {
+                printf(".");
+            }
+            else {
+                printf(" ");
+            }
+        }
+        printf("#\n");
+
+        for (int i = 0; i < ROOM_WIDTH; i++) {
+            printf("#");
+        }
+        printf("\n");
+
+
+
+
 
         srand((unsigned)time(NULL));
 
@@ -319,50 +367,7 @@ int main(void) {
         else {
             printf("저희 매장에서는 취급하고 있지 않은 제품입니다. 다른 매장으로 가주세요, 감사합니다.\n");
         }
-                for (int i = 0; i < ROOM_WIDTH; i++) {
-                    printf("#");
-                }
-                printf("\n");
-
-                printf("#");
-                for (int i = 1; i < ROOM_WIDTH - 1; i++) {
-                    if (i == HME_POS) {
-                        printf("H"); //집
-                    }
-                    else if (i == TWR_POS) {
-                        printf("T"); //타워
-                    }
-                    else if (i == SCR_POS) {
-                        printf("S"); //스크래쳐
-                    }
-                    else if (i == BWL_POS) { //냄비
-                        printf("B");
-                    }
-                    else {
-                        printf(" ");
-                    }
-                }
-                printf("#\n");
-
-                printf("#");
-                for (int i = 1; i < ROOM_WIDTH - 1; i++) {
-                    if (i == cat) {
-                        printf("C"); //고양이
-                    }
-                    else if (i == leave && cat != leave) {
-                        printf(".");
-                    }
-                    else {
-                        printf(" ");
-                    }
-                }
-                printf("#\n");
-
-                for (int i = 0; i < ROOM_WIDTH; i++) {
-                    printf("#");
-                }
-                printf("\n");
-
+    
                 /* printf("%s 이동: 집사와 친밀할 수록 냄비로 이동할 확률이 높아집니다.\n", name); // ver. 1 좌우 이동 부분임
                  int limit = 6 - relation;
                  double probability = ((6 - limit + 1) / 6.0) * 100.0;
@@ -455,27 +460,23 @@ int main(void) {
                 turnCount++; // 턴이 시작될 때마다 턴 카운트 증가
                 printf("\n--- 현재 %d번째 턴 ---\n", turnCount);
 
-                if (turnCount % 3 == 0) { // turnCount를 3으로 나눈 나머지가 0이면 3의 배수
+                if (turnCount % 3 == 0) { // turnCount를 3으로 나눈 나머지가 0이면 3의 배
+                    char userAnswer[100]; //돌발 퀘스트를 위한 사용자 입력
                     printf("\n*** 돌발 퀘스트 발생! ***\n");
                     printf("%s이의 털 색깔은 무엇일까요?\n", name);
                     printf(">> ");
-                    while (scanf_s("%s", userAnswer, sizeof(userAnswer)) != 1) {
-                        printf("잘못된 입력입니다. 다시 입력해주세요: ");
-                        while (getchar() != '\n');
-                    }
-                    while (getchar() != '\n');
-
-                    if (strcmp(userAnswer, "없다.") == 0) {
-                        printf("정답입니다.\n");
-                    }
-                    else {
-                        printf("틀렸습니다. 이곳에서 그 고양이는 실존하지 않습니다.\n 당신은 이 프로그램을 통해 상상을 만들어 내어 그 상상 속 고양이의 색깔을 말한 것 인가요?\n");
-                        printf("살아있던 적도 죽었던 적도 없습니다.\n 하지만 당신의 머릿속에서는 살아있었을 수도 있었겠네요.\ 고양이도 이미 알고 있었을 것 입니다.\n %s는 어떤 모습이었나요?\n 웃고있었나요?\n\n", name);
-                    }
+                    scanf_s("%s", userAnswer, 100);
+                    printf("정답입니다.\n");
+                    printf("틀렸습니다. 이곳에서 그 고양이는 실존하지 않습니다.\n 당신은 이 프로그램을 통해 상상을 만들어 내어 그 상상 속 고양이의 색깔을 말한 것 인가요?\n");
+                    printf("살아있던 적도 죽었던 적도 없습니다.\n 하지만 당신의 머릿속에서는 살아있었을 수도 있었겠네요.\ 고양이도 이미 알고 있었을 것 입니다.\n %s는 어떤 모습이었나요?\n 웃고있었나요?\n\n", name);
                     printf("*** 돌발 퀘스트 종료 ***\n");
                     printf("\n");
                 }
-            }
 
-            return 0;
-        }
+                Sleep(2500);
+                system("cls"); //화면 지우기
+    }
+
+
+    return 0;
+}
