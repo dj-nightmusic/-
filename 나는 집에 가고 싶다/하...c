@@ -47,6 +47,8 @@ int main(void) {
     toy = laser + mouse; //레이저와 쥐 만을 장난감으로 여기는 세상임
     CP += ((feel - 1) > 0 ? (feel - 1) : 0) + relation; //누적하기 위해 + 붙이무
     int choice;
+    int turnCount = 0;
+    char userAnswer[100];
 
     while (1) {
         if (feel < 0) {
@@ -449,6 +451,24 @@ int main(void) {
                     printf("%s은(는) 캣타워를 뛰어다닙니다. 기분이 제법 좋아졌습니다.\n", name);
                     feel += 2;
                 }
+                turnCount++; // 턴이 시작될 때마다 턴 카운트 증가
+                printf("\n--- 현재 %d번째 턴 ---\n", turnCount);
+
+                if (turnCount % 3 == 0) { // turnCount를 3으로 나눈 나머지가 0이면 3의 배
+                    char userAnswer[100]; //돌발 퀘스트를 위한 사용자 입력
+                    printf("\n*** 돌발 퀘스트 발생! ***\n");
+                    printf("%s이의 털 색깔은 무엇일까요?\n", name);
+                    printf(">> ");
+                    scanf_s("%s", userAnswer, 100);
+                    printf("정답입니다.\n");
+                    printf("틀렸습니다. 이곳에서 그 고양이는 실존하지 않습니다.\n 당신은 이 프로그램을 통해 상상을 만들어 내어 그 상상 속 고양이의 색깔을 말한 것 인가요?\n");
+                    printf("살아있던 적도 죽었던 적도 없습니다.\n 하지만 당신의 머릿속에서는 살아있었을 수도 있었겠네요.\ 고양이도 이미 알고 있었을 것 입니다.\n %s는 어떤 모습이었나요?\n 웃고있었나요?\n\n", name);
+                    printf("*** 돌발 퀘스트 종료 ***\n");
+                    printf("\n");
+                }
+
+                Sleep(2500);
+                system("cls");
             }
 
             return 0;
