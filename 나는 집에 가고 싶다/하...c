@@ -98,6 +98,50 @@ int main(void) {
         printf("===============================\n\n");
         Sleep(500);
 
+        for (int i = 0; i < ROOM_WIDTH; i++) {
+            printf("#");
+        }
+        printf("\n");
+
+        printf("#");
+        for (int i = 1; i < ROOM_WIDTH - 1; i++) {
+            if (i == HME_POS) {
+                printf("H"); //집
+            }
+            else if (i == TWR_POS) {
+                printf("T"); //타워
+            }
+            else if (i == SCR_POS) {
+                printf("S"); //스크래쳐
+            }
+            else if (i == BWL_POS) { //냄비
+                printf("B");
+            }
+            else {
+                printf(" ");
+            }
+        }
+        printf("#\n");
+
+        printf("#");
+        for (int i = 1; i < ROOM_WIDTH - 1; i++) {
+            if (i == cat) {
+                printf("C"); //고양이
+            }
+            else if (i == leave && cat != leave) {
+                printf(".");
+            }
+            else {
+                printf(" ");
+            }
+        }
+        printf("#\n");
+
+        for (int i = 0; i < ROOM_WIDTH; i++) {
+            printf("#");
+        }
+        printf("\n");
+
         srand((unsigned)time(NULL));
 
         printf("주사위의 눈이 6 - %d이하면 그냥 기분이 나빠집니다.\n 주사위를 굴립니다. 또르륵...\n", relation);
@@ -316,50 +360,7 @@ int main(void) {
         else {
             printf("저희 매장에서는 취급하고 있지 않은 제품입니다. 다른 매장으로 가주세요, 감사합니다.\n");
         }
-                for (int i = 0; i < ROOM_WIDTH; i++) {
-                    printf("#");
-                }
-                printf("\n");
-
-                printf("#");
-                for (int i = 1; i < ROOM_WIDTH - 1; i++) {
-                    if (i == HME_POS) {
-                        printf("H"); //집
-                    }
-                    else if (i == TWR_POS) {
-                        printf("T"); //타워
-                    }
-                    else if (i == SCR_POS) {
-                        printf("S"); //스크래쳐
-                    }
-                    else if (i == BWL_POS) { //냄비
-                        printf("B");
-                    }
-                    else {
-                        printf(" ");
-                    }
-                }
-                printf("#\n");
-
-                printf("#");
-                for (int i = 1; i < ROOM_WIDTH - 1; i++) {
-                    if (i == cat) {
-                        printf("C"); //고양이
-                    }
-                    else if (i == leave && cat != leave) {
-                        printf(".");
-                    }
-                    else {
-                        printf(" ");
-                    }
-                }
-                printf("#\n");
-
-                for (int i = 0; i < ROOM_WIDTH; i++) {
-                    printf("#");
-                }
-                printf("\n");
-
+               
                 /* printf("%s 이동: 집사와 친밀할 수록 냄비로 이동할 확률이 높아집니다.\n", name); // ver. 1 좌우 이동 부분임
                  int limit = 6 - relation;
                  double probability = ((6 - limit + 1) / 6.0) * 100.0;
