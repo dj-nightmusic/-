@@ -467,7 +467,7 @@ int main(void) {
                     printf("\n");
                 }
 
-                Sleep(2500);
+                Sleep(2000);
                 system("cls");
             }
 
